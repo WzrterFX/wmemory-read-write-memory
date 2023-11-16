@@ -3,32 +3,28 @@
 #include <Windows.h>
 #include <iostream>
 
-#include "wmemory/wmemory.h"
+#include "Wmemory/Wmemory.h"
 
-const uintptr_t dwLocalPlayerController = 0x17E8158;
-const uintptr_t m_iDesiredFOV = 0x6A4;
+const wchar_t* processName = L"cs2.exe";
+const wchar_t* moduleName = L"client.dll";
 
 int main()
 {
-    uintptr_t processID = GetProcessID(L"cs2.exe");
+    uintptr_t processID = Wmemory::GetProcessID(processName);
+    if (processID == 0)
+        return 0;
+
     HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processID);
-    if (processHandle == NULL)
+    if (processHandle == nullptr)
         return 0;
 
-    uintptr_t clientModule = GetModuleBaseAddress(processID, L"client.dll");
-    if (clientModule == NULL)
+    uintptr_t moduleBaseAddress = Wmemory::GetModuleBaseAddress(processID, moduleName);
+    if (moduleBaseAddress == 0)
         return 0;
 
-    uintptr_t localPlayerController = ReadMemory(processHandle, clientModule + dwLocalPlayerController, sizeof(uintptr_t));
+    uintptr_t localPlayerController = Wmemory::ReadMemory(processHandle, moduleBaseAddress + 0x17FCDC8, sizeof(uintptr_t));
 
-    uintptr_t desiredFOVAddress = localPlayerController + m_iDesiredFOV;
-
-    int defaultFov = ReadMemory(processHandle, desiredFOVAddress, sizeof(int));
-    cout << "default fov is " << defaultFov << endl;
-
-    WriteMemory(processHandle, desiredFOVAddress, 144, sizeof(int));
-    int currentFov = ReadMemory(processHandle, desiredFOVAddress, sizeof(int));
-    cout << "new fov is " << currentFov << endl;
+    Wmemory::WriteMemory(processHandle, localPlayerController + 0x6BC, 144, sizeof(int));
 
     CloseHandle(processHandle);
     return 0;

@@ -13,21 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="wmemory">
-      <UniqueIdentifier>{71d61ecf-53f4-419c-ba93-a49e0c5c2964}</UniqueIdentifier>
+    <Filter Include="Wmemory">
+      <UniqueIdentifier>{58174f54-c0ef-47fe-a194-0c232ac03af4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Wmemory\Wmemory.cpp">
+      <Filter>Wmemory</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="wmemory\wmemory.cpp">
-      <Filter>wmemory</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wmemory\wmemory.h">
-      <Filter>wmemory</Filter>
+    <ClInclude Include="Wmemory\Wmemory.h">
+      <Filter>Wmemory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
