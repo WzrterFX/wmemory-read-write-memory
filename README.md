@@ -20,7 +20,7 @@ The library offers several features to facilitate process interaction and memory
 ## Features
 
 ### 1. Get process
-- **Function:** `Wmemory::GetProcessID`
+- **Function:** `Wmemory::GetProcessID(const wchar_t* processName);`
   - **Description:** Get the process id of a target process by providing its name.
   - **Example:**
     ```cpp
@@ -28,7 +28,7 @@ The library offers several features to facilitate process interaction and memory
     ```
 
 ### 2. Get module address
-- **Function:** `Wmemory::GetModuleBaseAddress`
+- **Function:** `GetModuleBaseAddress(uintptr_t processID, const wchar_t* moduleName);`
   - **Description:** Get the base address of a module within a specified process.
   - **Example:**
     ```cpp
@@ -36,7 +36,7 @@ The library offers several features to facilitate process interaction and memory
     ```
 
 ### 3. Memory reading
-- **Function:** `Wmemory::ReadMemory`
+- **Function:** `Wmemory::ReadMemory<T>(HANDLE processHandle, uintptr_t address);`
   - **Description:** Read the value of a specified data type from the memory of a target process.
   - **Example:**
     ```cpp
@@ -44,7 +44,7 @@ The library offers several features to facilitate process interaction and memory
     ```
 
 ### 4. Memory writing
-- **Function:** `Wmemory::WriteMemory`
+- **Function:** `Wmemory::WriteMemory(HANDLE processHandle, uintptr_t address, const T& value)`
   - **Description:** Write a value of a specified data type to the memory of a target process.
   - **Example:**
     ```cpp
