@@ -5,20 +5,23 @@
 
 namespace Wmemory
 {
-    /// <summary>
-    /// Get the process ID associated with a specified process name.
-    /// </summary>
-    /// <param name="processName">The name of the target process.</param>
-    /// <returns>The process id as an unsigned integer "uintptr_t".</returns>
     uintptr_t GetProcessID(const wchar_t* processName);
 
-    /// <summary>
-    /// Get the base address of a module within a given process.
-    /// </summary>
-    /// <param name="processID">The process id of the target process.</param>
-    /// <param name="moduleName">The name of the target module.</param>
-    /// <returns>The process id as an unsigned integer "uintptr_t".</returns>
     uintptr_t GetModuleBaseAddress(uintptr_t processID, const wchar_t* moduleName);
+
+    template <typename T>
+    T ReadMemory(HANDLE processHandle, uintptr_t address)
+    {
+        T value;
+        ReadProcessMemory(processHandle, reinterpret_cast<LPCVOID>(address), &value, sizeof(T), NULL);
+        return value;
+    }
+
+    template <typename T>
+    void WriteMemory(HANDLE processHandle, uintptr_t address, const T& value)
+    {
+        WriteProcessMemory(processHandle, reinterpret_cast<LPVOID>(address), &value, sizeof(T), NULL);
+    }
 }
 
 #endif

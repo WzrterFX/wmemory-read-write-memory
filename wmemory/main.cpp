@@ -1,9 +1,9 @@
-﻿using namespace std;
-
-#include <Windows.h>
+﻿#include <Windows.h>
 #include <iostream>
 
 #include "wmemory/wmemory.h"
+
+using namespace std;
 
 int main()
 {
@@ -19,14 +19,11 @@ int main()
     if (moduleBaseAddress == NULL)
         return 0;
 
-    uintptr_t localPlayerController;
-    ReadProcessMemory(processHandle, reinterpret_cast<LPCVOID>(moduleBaseAddress + 0x180AA20), &localPlayerController, sizeof(uintptr_t), NULL);
+    uintptr_t localPlayerController = Wmemory::ReadMemory<uintptr_t>(processHandle, moduleBaseAddress + 0x180AA20);
 
-    int writeFov = 144;
-    WriteProcessMemory(processHandle, reinterpret_cast<LPVOID>(localPlayerController + 0x6D4), &writeFov, sizeof(int), NULL);
+    Wmemory::WriteMemory<int>(processHandle, localPlayerController + 0x6D4, 144);
 
-    int readFov = NULL;
-    ReadProcessMemory(processHandle, reinterpret_cast<LPVOID>(localPlayerController + 0x6D4), &readFov, sizeof(int), NULL);
+    Wmemory::ReadMemory<int>(processHandle, localPlayerController + 0x6D4);
 
     CloseHandle(processHandle);
     return 0;
