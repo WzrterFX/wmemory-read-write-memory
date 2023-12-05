@@ -54,7 +54,7 @@ The library offers several features to facilitate process interaction and memory
 
 ## Example Usage
 
-```main.cpp
+```cpp
 #include <Windows.h>
 #include <iostream>
 
