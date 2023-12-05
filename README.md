@@ -15,25 +15,27 @@ The library offers several features to facilitate process interaction and memory
    git clone https://github.com/WzrterFX/wmemory-read-write-memory
    ```
 
+
+
 ## Features
 
-### 1. Process Identification
+### 1. Get process
 - **Function:** `Wmemory::GetProcessID`
-  - **Description:** Obtain the process ID (PID) of a target process by providing its name.
+  - **Description:** Get the process id of a target process by providing its name.
   - **Example:**
     ```cpp
     uintptr_t processID = Wmemory::GetProcessID(L"Procces.exe");
     ```
 
-### 2. Module Base Address Retrieval
+### 2. Get module address
 - **Function:** `Wmemory::GetModuleBaseAddress`
-  - **Description:** Retrieve the base address of a module within a specified process.
+  - **Description:** Get the base address of a module within a specified process.
   - **Example:**
     ```cpp
     uintptr_t moduleBaseAddress = Wmemory::GetModuleBaseAddress(processID, L"target.dll");
     ```
 
-### 3. Memory Reading
+### 3. Memory reading
 - **Function:** `Wmemory::ReadMemory`
   - **Description:** Read the value of a specified data type from the memory of a target process.
   - **Example:**
@@ -41,7 +43,7 @@ The library offers several features to facilitate process interaction and memory
     int specifiedMemory = Wmemory::ReadMemory<int>(processHandle, moduleBaseAddress + 0x00);
     ```
 
-### 4. Memory Writing
+### 4. Memory writing
 - **Function:** `Wmemory::WriteMemory`
   - **Description:** Write a value of a specified data type to the memory of a target process.
   - **Example:**
@@ -51,6 +53,7 @@ The library offers several features to facilitate process interaction and memory
 
 
 ## Example Usage
+
 ```main.cpp
 #include <Windows.h>
 #include <iostream>
@@ -83,7 +86,3 @@ int main()
     return 0;
 }
 ```
-
-
-###Contributing
-If you wish to contribute to repository, please create a fork of the repository, make your changes, and submit a pull request.
