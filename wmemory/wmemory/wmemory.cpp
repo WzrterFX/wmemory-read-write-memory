@@ -1,8 +1,7 @@
-using namespace std;
-
 #include <Windows.h>
 #include <TlHelp32.h>
-#include <vector>
+
+using namespace std;
 
 namespace Wmemory
 {
@@ -64,22 +63,5 @@ namespace Wmemory
         CloseHandle(moduleSnapshot);
 
         return moduleBaseAddress;
-    }
-
-    uintptr_t ReadMemory(HANDLE processHandle, uintptr_t address, size_t size)
-    {
-        uintptr_t bytesRead = 0;
-        uintptr_t buffer = 0;
-
-        ReadProcessMemory(processHandle, (LPCVOID)address, &buffer, size, &bytesRead);
-
-        return buffer;
-    }
-
-    void WriteMemory(HANDLE processHandle, uintptr_t address, uintptr_t value, size_t size)
-    {
-        uintptr_t bytesWritten = 0;
-
-        WriteProcessMemory(processHandle, (LPVOID)address, &value, size, &bytesWritten);
     }
 }

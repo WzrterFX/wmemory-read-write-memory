@@ -152,10 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Wmemory\Wmemory.cpp" />
+    <ClCompile Include="wmemory\wmemory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Wmemory\Wmemory.h" />
+    <ClInclude Include="wmemory\wmemory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
