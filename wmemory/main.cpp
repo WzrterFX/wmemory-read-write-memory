@@ -1,30 +1,22 @@
-﻿﻿#include <Windows.h>
-#include <iostream>
+#include "include.h"
 
-#include "wmemory/wmemory.h"
-
-using namespace std;
+#include "wmemory.hpp"
+#include "offsets.h"
 
 int main()
 {
-    uintptr_t processID = Wmemory::GetProcessID(L"cs2.exe");
-    if (processID == NULL)
-        return 0;
+	while (true)
+	{
+		uint64 localPlayerPawn = wmemory.ReadMemory<uint64>(Offsets::client + Offsets::dwLocalPlayerPawn);
+		if (localPlayerPawn == NULL)
+			continue;
 
-    HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processID);
-    if (processHandle == NULL)
-        return 0;
+		uint64 cameraServices = wmemory.ReadMemory<uint64>(localPlayerPawn + Offsets::m_pCameraServices);
+		if (cameraServices == NULL)
+			continue;
 
-    uintptr_t moduleBaseAddress = Wmemory::GetModuleBaseAddress(processID, L"client.dll");
-    if (moduleBaseAddress == NULL)
-        return 0;
+		wmemory.WriteMemory<sint32>(cameraServices + Offsets::m_iFOV, 144);
+	}
 
-    uintptr_t localPlayerController = Wmemory::ReadMemory<uintptr_t>(processHandle, moduleBaseAddress + 0x180AA20);
-
-    Wmemory::WriteMemory<int>(processHandle, localPlayerController + 0x6D4, 144);
-
-    Wmemory::ReadMemory<int>(processHandle, localPlayerController + 0x6D4);
-
-    CloseHandle(processHandle);
-    return 0;
+	return 0;
 }
