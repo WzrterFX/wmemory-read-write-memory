@@ -6,7 +6,7 @@ The library offers several features to facilitate process interaction and memory
 ## Getting Started
 
 ### Prerequisites
-- Visual Studio or any C++ compiler that supports C++11 or later.
+- Visual Studio or any C++ compiler that supports C++14 or later.
 
 ### Installation
 1. Clone the repository:
@@ -17,33 +17,33 @@ The library offers several features to facilitate process interaction and memory
 ## Features
 
 ### 1. Get process
-- **Function:** `Wmemory wmemory(const wchar_t* name);`
+- **Function:** `Memory memory(const wchar_t* name);`
   - **Description:** Constructor for wmemory.
   - **Example:**
     ```cpp
-    Wmemory wmemory("target.exe");
+    Memory memory("target.exe");
     ```
 
 ### 2. Get module address
-- **Function:** `uint64 GetModuleBase(const wchar_t* name);`
+- **Function:** `uintptr_t GetModule(const wchar_t* name);`
   - **Description:** Get the base address of a module within a specified process.
   - **Example:**
     ```cpp
-    adr64 base = wmemory.GetModuleBase(L"target.dll");
+    uintptr_t target = memory.GetModule(L"target.dll");
     ```
 
 ### 3. Memory reading
-- **Function:** `T ReadMemory(uint64 address);`
+- **Function:** `T ReadMemory(uintptr_t address);`
   - **Description:** Read the value of a specified data type from the memory of a target process.
   - **Example:**
     ```cpp
-    uint64 address = wmemory.ReadMemory<uint64>(0x0);
+    T address = memory.ReadMemory<T>(0x0);
     ```
 
 ### 4. Memory writing
-- **Function:** `void WriteMemory(uint64 address, const T& value)`
+- **Function:** `void WriteMemory(uintptr_t address, const T& value)`
   - **Description:** Write a value of a specified data type to the memory of a target process.
   - **Example:**
     ```cpp
-    wmemory.WriteMemory<sint32>(0x0, 144);
+    memory.WriteMemory<int>(0x0, 144);
     ```
